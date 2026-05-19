@@ -1,0 +1,71 @@
+footer {
+    background:linear-gradient(45deg,#00E5FF,#006ee6);
+    
+    padding: 40px 0;
+    margin-top: 40px;
+    flex: 1;
+}
+
+/* Footer container with 3 equal sections */
+.footer-container {
+    display: flex;
+    justify-content:space-evenly;
+    
+    max-width: 1200px;
+    margin: 0 auto;
+    
+        /* Pushes the footer to the bottom */
+    
+}
+
+/* Each footer section: links, address, map */
+.footer-section {
+    
+    padding: 0 20px;
+}
+
+/* Social media icons styling */
+.footer-section.links a {
+    color:black;
+    font-size: 1.5em;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.footer-section.links a:hover {
+    color: #999;
+}
+
+/* Address section */
+.footer-section.address h3,
+.footer-section.address p {
+    color: black;
+}
+
+/* Map iframe styling */
+.footer-section.map iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+}
+h3,p
+{
+    color: black;
+}
+p.detail
+{
+    text-align: center;
+    justify-content: center;
+}
+.footer-section.footer-section.links
+{
+    margin-right: 8%;
+}
+.footer-section.address
+{
+    margin-right: 8%;
+}
+.num
+{
+    margin-right:8% ;
+}

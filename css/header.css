@@ -1,0 +1,73 @@
+/* Sticky navigation bar */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures it stays on top of other content */
+    background:linear-gradient(45deg,#00E5FF,#006ee6); /* Optional: Adjust this for your header's background */
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow for better visibility */
+    text-align: center;
+    height: 26PX;
+    padding: 1%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+
+}
+
+nav.links a {
+    color:black;
+    font-style:bold;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 5pm;
+ }
+.slideshow-container {
+    position: relative;
+    max-width: 100%; /* Ensure the container can be as wide as the parent */
+    height: 80vh; /* Set height to a percentage of the viewport height or adjust as needed */
+    margin: 10px auto 0;
+        overflow: hidden;
+ }
+
+img.slides {
+    margin-top: -30px;
+
+    width: 100%; /* Make the image span the full width of the container */
+    height: 100%; /* Ensure the image covers the full height of the container */
+    object-fit: cover; /* Maintain aspect ratio and ensure image covers the container */
+    object-position: center; /* Center the image within the container */
+    display: block; /* Remove any extra space below the image */
+}
+.signs
+{
+    display: flex;
+    justify-content: flex-end;
+}
+.sign-p
+{
+    color: rgb(15, 12, 12);
+    background-color: rgb(46, 144, 224);
+    margin: 1%;
+    padding: 1%;  
+    text-decoration: none;
+    
+}
+.sign-s
+{
+    color: rgb(15, 12, 12);
+    background-color: rgb(46, 144, 224);
+    margin: 1%;
+    padding: 1%;  
+    text-decoration: none;
+    
+}
+.topic
+{
+   margin-right: 45%;
+   color: black;
+   font-family: 'Roboto', sans-serif;
+   text-align: left;
+}
+body {
+    background: #a9c5e282;
+}
