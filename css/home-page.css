@@ -1,0 +1,48 @@
+.m1
+{
+    color: black;
+    font-size: 7em;
+    text-align: center;
+    margin-top: -10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.m12
+{
+    font-size: 1.3em;
+    margin-left: 15px;
+}
+.main1
+{
+    display: flex;
+    background-color:#a9c5e282;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.186);
+     backdrop-filter: blur(30%);
+    
+}
+.testimonials
+{margin: 20px 0;
+padding: 20px;
+background-color: white;
+border-radius: 10px;
+
+}
+.det1
+{ background-color:white;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    font-size: large;
+    margin: 10px;
+    margin-right: 10px;
+}
+.det1 p.new
+{
+  
+   margin-left: 100px;
+   margin-right: 100px;
+}
+
+ 
