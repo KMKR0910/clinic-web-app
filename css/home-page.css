@@ -1,48 +1,275 @@
-.m1
-{
-    color: black;
-    font-size: 7em;
-    text-align: center;
-    margin-top: -10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
-}
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+  --accent-dark:    #16A34A;
 
-.m12
-{
-    font-size: 1.3em;
-    margin-left: 15px;
-}
-.main1
-{
-    display: flex;
-    background-color:#a9c5e282;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.186);
-     backdrop-filter: blur(30%);
-    
-}
-.testimonials
-{margin: 20px 0;
-padding: 20px;
-background-color: white;
-border-radius: 10px;
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --surface-alt:    #F1F5F9;
+  --glass:          rgba(255, 255, 255, 0.72);
+  --glass-border:   rgba(255, 255, 255, 0.45);
 
-}
-.det1
-{ background-color:white;
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    font-size: large;
-    margin: 10px;
-    margin-right: 10px;
-}
-.det1 p.new
-{
-  
-   margin-left: 100px;
-   margin-right: 100px;
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --shadow-sm:  0 2px 8px rgba(14, 165, 233, 0.08);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.16);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
 }
 
- 
+/* ─── Hero Title (.m1) ──────────────────────────────────── */
+.m1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin: 0 auto 0.25em;
+
+  /* Gradient text */
+  background: linear-gradient(
+    135deg,
+    var(--primary)      0%,
+    var(--secondary)    50%,
+    var(--accent)       100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Soft glow instead of hard shadow */
+  filter: drop-shadow(0 4px 24px rgba(14, 165, 233, 0.22));
+
+  /* Subtle entrance animation */
+  animation: titleReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── Subtitle / Meta Label (.m12) ─────────────────────── */
+.m12 {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 15px;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1rem;
+  border-left: 3px solid var(--primary-light);
+  transition: border-color var(--transition);
+}
+
+.m12:hover {
+  border-left-color: var(--primary);
+  color: var(--text);
+}
+
+/* ─── Main Card / Panel (.main1) ───────────────────────── */
+.main1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: stretch;
+
+  /* Glassmorphism */
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.10) 0%,
+    rgba(20, 184, 166, 0.08) 50%,
+    rgba(248, 250, 252, 0.85) 100%
+  );
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.main1:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ─── Testimonials Section (.testimonials) ─────────────── */
+.testimonials {
+  margin: 2rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(14, 165, 233, 0.10);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+/* Decorative top stripe */
+.testimonials::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--secondary) 50%,
+    var(--accent) 100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.testimonials:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ─── Detail Block (.det1) ──────────────────────────────── */
+.det1 {
+  background: var(--surface);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  margin: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(14, 165, 233, 0.09);
+  box-shadow: var(--shadow-sm);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--text);
+  line-height: 1.7;
+
+  transition: box-shadow var(--transition),
+              border-color var(--transition),
+              transform var(--transition);
+}
+
+.det1:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(14, 165, 233, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ─── Description Paragraph (.det1 p.new) ──────────────── */
+.det1 p.new {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  color: var(--text-muted);
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* ─── Responsive Breakpoints ────────────────────────────── */
+
+/* Tablet (≤ 900px) */
+@media (max-width: 900px) {
+  .m1 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .main1 {
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .det1 {
+    margin: 0.5rem 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .det1 p.new {
+    padding: 0 1rem;
+  }
+
+  .testimonials {
+    margin: 1.25rem 0;
+  }
+}
+
+/* Mobile (≤ 560px) */
+@media (max-width: 560px) {
+  .m1 {
+    font-size: clamp(2rem, 12vw, 3rem);
+    letter-spacing: -0.02em;
+  }
+
+  .m12 {
+    font-size: 0.95rem;
+    margin-left: 0;
+    padding-left: 0.75rem;
+  }
+
+  .main1 {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    gap: 1rem;
+  }
+
+  .det1 {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .det1 p.new {
+    padding: 0;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .testimonials {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin: 1rem 0;
+  }
+
+
+}

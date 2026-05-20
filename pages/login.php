@@ -39,7 +39,7 @@ try {
                 $_SESSION['name'] = $row['Name'];         // Name
 
                 // Redirect to the dashboard
-                header("Location: PatientD.php");
+                header("Location: patient/patient-dashboard.php");
                 exit();
             } else {
                 // Incorrect password
