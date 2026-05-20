@@ -1,0 +1,37 @@
+.la1 {
+    width: 550px; /* Adjust image size */
+    height: 40%;  /* Maintain aspect ratio */
+    margin-right: 20px; /* Add space between the image and text */
+    border-radius: 16px;
+    justify-content: flex-end;
+    margin-left: 60%;
+    margin-top: -300px;
+}
+fieldset
+{
+    margin: 2%;
+    padding: 4%;
+    border: radius 100px;
+    border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+width: 50%;
+
+}
+.image-text-container {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    font-size: 14pt;
+    margin: 5%;
+    justify-content: center;
+}
+
+.small-image {
+    width: 600px; /* Adjust image size */
+    height: auto;  /* Maintain aspect ratio */
+    margin-right: 20px; /* Add space between the image and text */
+    border-radius: 16px;
+}
+
