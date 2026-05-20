@@ -1,31 +1,277 @@
+/* ============================================================
+   Medicare+ – Medical Centre Management System
+   FILE: about-page.css  (About Us – Doctor Profile)
+   Design System: Healthcare Premium – Clean Glassmorphism
+   ============================================================ */
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --glass:          rgba(255, 255, 255, 0.72);
+  --glass-border:   rgba(255, 255, 255, 0.45);
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --shadow-sm:  0 2px 8px  rgba(14, 165, 233, 0.08);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.16);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --radius-pill: 999px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
+}
+
+/* ─── Page Intro (optional hero label above card) ───────── */
+main::before {
+  content: 'About Us';
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+main::after {
+  content: 'Meet the doctor behind Medicare+';
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+}
+
+/* ─── Profile Layout (.image-text-container) ────────────── */
 .image-text-container {
-    display: flex;
-    align-items: center; /* Vertically center the content */
-    font-size: 14pt;
-    margin: 5%;
-    justify-content: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  flex-wrap: wrap;
 }
 
+/* ─── Doctor Photo (.small-image) ───────────────────────── */
 .small-image {
-    width: 600px; /* Adjust image size */
-    height: auto;  /* Maintain aspect ratio */
-    margin-right: 20px; /* Add space between the image and text */
-    border-radius: 16px;
+  flex: 1 1 280px;
+  max-width: 420px;
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-right: 0;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.text-content {
-    max-width: 400px; /* Adjust max width as necessary */
-    font-size: 14pt;
-    line-height: 1.5;
+.small-image:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
-fieldset
-{
-    margin: 2%;
-    padding: 4%;
-    border: radius 100px;
-    border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+
+/* ─── Bio Text Wrapper (.abt) ───────────────────────────── */
+.abt {
+  flex: 1 1 320px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+/* ─── Bio Fieldset Card ─────────────────────────────────── */
+fieldset {
+  width: 100%;
+  margin: 0;
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  border: 1px solid rgba(14, 165, 233, 0.14);
+  border-radius: var(--radius-lg);
+
+  /* Glassmorphism */
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.9;
+
+  transition: box-shadow var(--transition), transform var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative gradient top-left corner accent */
+fieldset::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--secondary) 50%,
+    var(--accent) 100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+fieldset:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transform: translateY(-3px);
+}
+
+/* Doctor name / credential highlights inside bio */
+fieldset strong,
+fieldset b {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+/* ─── Stat Badges (reusable if you add them later) ──────── */
+.stat-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.stat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  background: var(--primary-light);
+  border-radius: var(--radius-md);
+  min-width: 90px;
+  text-align: center;
+}
+
+.stat-badge span:first-child {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  line-height: 1;
+}
+
+.stat-badge span:last-child {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* ─── Text Content (.text-content) ─────────────────────── */
+.text-content {
+  max-width: 480px;
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+/* ─── Responsive Breakpoints ────────────────────────────── */
+
+/* Tablet (≤ 860px) */
+@media (max-width: 860px) {
+  .image-text-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .small-image {
+    max-width: 100%;
+    flex: none;
+    width: 100%;
+    height: 360px;
+  }
+
+  .abt {
+    flex: none;
+    width: 100%;
+  }
+
+  fieldset {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile (≤ 560px) */
+@media (max-width: 560px) {
+  main {
+    padding: 1.25rem 0.85rem;
+  }
+
+  main::after {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .small-image {
+    height: 260px;
+    border-radius: var(--radius-md);
+  }
+
+  fieldset {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .text-content {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .stat-badge span:first-child {
+    font-size: 1.2rem;
+  }
 }

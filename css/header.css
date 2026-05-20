@@ -1,73 +1,327 @@
-/* Sticky navigation bar */
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --glass:          rgba(255, 255, 255, 0.75);
+  --glass-border:   rgba(255, 255, 255, 0.50);
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --shadow-sm:  0 2px 8px  rgba(14, 165, 233, 0.08);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.13);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.18);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-pill: 999px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+
+  --header-h: 64px;
+}
+
+/* ─── Base / Body ───────────────────────────────────────── */
+body {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Sticky Header ─────────────────────────────────────── */
 header {
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* Ensures it stays on top of other content */
-    background:linear-gradient(45deg,#00E5FF,#006ee6); /* Optional: Adjust this for your header's background */
-    padding: 10px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow for better visibility */
-    text-align: center;
-    height: 26PX;
-    padding: 1%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-h);
+  color: var(--text);
 
+  /* Premium glassmorphism bar */
+  background: linear-gradient(
+    100deg,
+    rgba(14, 165, 233, 0.92)  0%,
+    rgba(20, 184, 166, 0.90) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
 
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(14, 165, 233, 0.18),
+              0 1px 0 rgba(255, 255, 255, 0.25) inset;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+  text-align: left;
+
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+/* ─── Navigation Links ──────────────────────────────────── */
+nav.links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 nav.links a {
-    color:black;
-    font-style:bold;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 5pm;
- }
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-pill);
+  transition: background var(--transition),
+              color var(--transition),
+              transform var(--transition);
+  white-space: nowrap;
+}
+
+nav.links a:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+nav.links a:active {
+  transform: translateY(0);
+}
+
+/* ─── Auth Buttons Container (.signs) ──────────────────── */
+.signs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  flex-shrink: 0;
+
+}
+
+/* ─── Sign-In Button (.sign-p) ──────────────────────────── */
+.sign-p {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-dark);
+  background: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  padding: 0.45rem 1.2rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition),
+              color var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+  white-space: nowrap;
+}
+
+.sign-p:hover {
+  background: #ffffff;
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Sign-Up Button (.sign-s) ──────────────────────────── */
+.sign-s {
+  display: inline-flex;
+  align-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  margin: 0;
+  padding: 0.45rem 1.2rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.30);
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+  white-space: nowrap;
+}
+
+.sign-s:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.38);
+}
+
+/* ─── Brand / Topic Title (.topic) ─────────────────────── */
+.topic {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  color: #181717;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin: 0;
+  margin-right: auto;         /* pushes nav + signs to right */
+  padding-right: 1.5rem;
+  white-space: nowrap;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── Slideshow Container (.slideshow-container) ────────── */
 .slideshow-container {
-    position: relative;
-    max-width: 100%; /* Ensure the container can be as wide as the parent */
-    height: 80vh; /* Set height to a percentage of the viewport height or adjust as needed */
-    margin: 10px auto 0;
-        overflow: hidden;
- }
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 80vh;
+  min-height: 340px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 
+  /* Subtle bottom fade overlay */
+  isolation: isolate;
+}
+
+.slideshow-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(14, 165, 233, 0.10) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Slide Images (img.slides) ─────────────────────────── */
 img.slides {
-    margin-top: -30px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin-top: 0;              /* removed the -30px hack */
 
-    width: 100%; /* Make the image span the full width of the container */
-    height: 100%; /* Ensure the image covers the full height of the container */
-    object-fit: cover; /* Maintain aspect ratio and ensure image covers the container */
-    object-position: center; /* Center the image within the container */
-    display: block; /* Remove any extra space below the image */
+  /* Smooth crossfade when JS swaps slides */
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.signs
-{
-    display: flex;
-    justify-content: flex-end;
+
+/* ─── Responsive Breakpoints ────────────────────────────── */
+
+/* Tablet (≤ 860px) */
+@media (max-width: 860px) {
+  :root { --header-h: 56px; }
+
+  header {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--header-h);
+    padding: 0.6rem clamp(0.75rem, 3vw, 1.5rem);
+    gap: 0.5rem;
+  }
+
+  .topic {
+    font-size: 1.05rem;
+    padding-right: 0.75rem;
+  }
+
+  nav.links a {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .slideshow-container {
+    height: 55vh;
+  }
 }
-.sign-p
-{
-    color: rgb(15, 12, 12);
-    background-color: rgb(46, 144, 224);
-    margin: 1%;
-    padding: 1%;  
-    text-decoration: none;
-    
+
+/* Mobile (≤ 560px) */
+@media (max-width: 560px) {
+  :root { --header-h: auto; }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    gap: 0.6rem;
+  }
+
+  .topic {
+    font-size: 1rem;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  nav.links {
+    width: 100%;
+    gap: 0.15rem;
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
+    scrollbar-width: none;
+  }
+
+  nav.links::-webkit-scrollbar { display: none; }
+
+  nav.links a {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .signs {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .sign-p,
+  .sign-s {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .slideshow-container {
+    height: 42vh;
+    min-height: 220px;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+  
+  .topic-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65em;
+  font-weight: 700;
+  padding: 0.1em 0.45em;
+  border-radius: 999px;
+  margin-left: 0.2em;
+  vertical-align: middle;
+  line-height: 1.4;
 }
-.sign-s
-{
-    color: rgb(15, 12, 12);
-    background-color: rgb(46, 144, 224);
-    margin: 1%;
-    padding: 1%;  
-    text-decoration: none;
-    
-}
-.topic
-{
-   margin-right: 45%;
-   color: black;
-   font-family: 'Roboto', sans-serif;
-   text-align: left;
-}
-body {
-    background: #a9c5e282;
 }
