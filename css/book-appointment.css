@@ -1,0 +1,344 @@
+
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+  --accent-dark:    #16A34A;
+  --danger:         #EF4444;
+  --warning:        #F59E0B;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --surface-alt:    #F1F5F9;
+  --glass:          rgba(255, 255, 255, 0.75);
+  --glass-border:   rgba(255, 255, 255, 0.45);
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --border:         rgba(14, 165, 233, 0.14);
+  --border-focus:   var(--primary);
+
+  --shadow-sm:  0 2px 8px  rgba(14, 165, 233, 0.07);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.16);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-pill: 999px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+body {
+  background-color: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Profile / Booking Card (.profile-container) ──────── */
+.profile-container {
+  max-width: 640px;
+  margin: clamp(1.5rem, 5vw, 3rem) auto;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+/* Gradient top stripe */
+.profile-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--secondary) 50%,
+    var(--accent) 100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.profile-container:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* ─── Section Headings inside card ─────────────────────── */
+.profile-container h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 1.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.profile-container h3:first-child {
+  margin-top: 0;
+}
+
+/* ─── Form Elements ─────────────────────────────────────── */
+.profile-container form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.profile-container label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  flex: 0 0 100%;
+}
+
+.profile-container input[type="date"] {
+  flex: 1 1 180px;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+}
+
+.profile-container input[type="date"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+/* ─── Buttons ───────────────────────────────────────────── */
+.profile-container button[name="check-Avaliability"] {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.4rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.30);
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.profile-container button[name="check-Avaliability"]:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.38);
+}
+
+.profile-container button[name="check-Avaliability"]:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+.profile-container button[name="book_appointment"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1.6rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.32);
+  margin-top: 1rem;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.profile-container button[name="book_appointment"]:hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(34, 197, 94, 0.40);
+}
+
+.profile-container button[name="book_appointment"]:active {
+  transform: translateY(0);
+}
+
+/* ─── Availability Results Table (.profile-table) ───────── */
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.25rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.9rem;
+}
+
+.profile-table th {
+  background: linear-gradient(
+    135deg,
+    var(--primary-light) 0%,
+    rgba(20, 184, 166, 0.12) 100%
+  );
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.profile-table td {
+  padding: 0.8rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--surface-alt);
+  transition: background var(--transition), color var(--transition);
+}
+
+.profile-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Zebra striping */
+.profile-table tr:nth-child(even) td {
+  background-color: var(--surface-alt);
+}
+
+/* Row hover */
+.profile-table tr:hover td {
+  background-color: var(--primary-light);
+  color: var(--text);
+}
+
+/* ─── Status / Feedback Messages ────────────────────────── */
+.profile-container p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0;
+  line-height: 1.65;
+}
+
+/* "Doctor available" success state */
+.profile-container p:has(+ table),
+.profile-container p.success {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(34, 197, 94, 0.10);
+  color: var(--accent-dark);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(34, 197, 94, 0.22);
+}
+
+/* "No appointments" / error state */
+.profile-container p.error,
+.profile-container p:only-child {
+  background: rgba(239, 68, 68, 0.07);
+  color: var(--danger);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(239, 68, 68, 0.18);
+}
+
+/* ─── Responsive Breakpoints ────────────────────────────── */
+
+/* Tablet (≤ 768px) */
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 1.25rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  .profile-container form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .profile-container input[type="date"] {
+    flex: none;
+    width: 100%;
+  }
+
+  .profile-container button[name="check-Avaliability"],
+  .profile-container button[name="book_appointment"] {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-table {
+    font-size: 0.82rem;
+  }
+
+  .profile-table th,
+  .profile-table td {
+    padding: 0.65rem 0.75rem;
+  }
+}
+
+/* Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .profile-container {
+    margin: 0.75rem;
+    padding: 1.1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .profile-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profile-table th,
+  .profile-table td {
+    white-space: nowrap;
+    padding: 0.55rem 0.65rem;
+    font-size: 0.78rem;
+  }
+}
