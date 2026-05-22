@@ -1,37 +1,242 @@
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --glass:          rgba(255, 255, 255, 0.72);
+  --glass-border:   rgba(255, 255, 255, 0.45);
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --shadow-sm:  0 2px 8px  rgba(14, 165, 233, 0.08);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.16);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-xl:  32px;
+  --radius-pill: 999px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ─── Fieldset (shared card style) ─────────────────────── */
+fieldset {
+  margin: 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  border-radius: var(--radius-lg);
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+fieldset:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Fieldset legend / headings */
+fieldset h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+/* Accent underline on fieldset headings */
+fieldset h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transition: width var(--transition);
+}
+
+fieldset:hover h3::after {
+  width: 70px;
+}
+
+/* Body text inside fieldsets */
+fieldset p,
+p.lab,
+p.abt {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin: 0;
+}
+
+/* ─── Laboratory Section (.labo) ────────────────────────── */
+.labo {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
+}
+
+.labo fieldset {
+  flex: 1 1 320px;
+}
+
+/* Lab image (.la1) */
 .la1 {
-    width: 550px; /* Adjust image size */
-    height: 40%;  /* Maintain aspect ratio */
-    margin-right: 20px; /* Add space between the image and text */
-    border-radius: 16px;
-    justify-content: flex-end;
-    margin-left: 60%;
-    margin-top: -300px;
+  flex: 1 1 280px;
+  max-width: 480px;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
-fieldset
-{
-    margin: 2%;
-    padding: 4%;
-    border: radius 100px;
-    border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
-width: 50%;
 
+.la1:hover {
+  transform: scale(1.02) translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
+
+/* ─── Pharmacy Section (.image-text-container) ──────────── */
 .image-text-container {
-    display: flex;
-    align-items: center; /* Vertically center the content */
-    font-size: 14pt;
-    margin: 5%;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  flex-wrap: wrap;
 }
 
+/* Pharmacy image (.small-image) */
 .small-image {
-    width: 600px; /* Adjust image size */
-    height: auto;  /* Maintain aspect ratio */
-    margin-right: 20px; /* Add space between the image and text */
-    border-radius: 16px;
+  flex: 1 1 280px;
+  max-width: 480px;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-right: 0;            /* replaced fixed margin-right */
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
+.small-image:hover {
+  transform: scale(1.02) translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Text wrapper beside pharmacy image */
+.abt {
+  flex: 1 1 320px;
+  margin: 0;
+  padding: 0;
+}
+
+.abt fieldset {
+  height: 100%;
+}
+
+/* ─── Text Content (.text-content) ─────────────────────── */
+.text-content {
+  max-width: 460px;
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+/* ─── Responsive Breakpoints ────────────────────────────── */
+
+/* Tablet (≤ 860px) */
+@media (max-width: 860px) {
+  .labo,
+  .image-text-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .la1,
+  .small-image {
+    max-width: 100%;
+    height: 260px;
+    flex: none;
+    width: 100%;
+  }
+
+  .labo fieldset,
+  .abt {
+    flex: none;
+    width: 100%;
+  }
+}
+
+/* Mobile (≤ 560px) */
+@media (max-width: 560px) {
+  main {
+    gap: 2rem;
+    padding: 1.25rem 0.85rem;
+  }
+
+  fieldset {
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  fieldset h3 {
+    font-size: 1.1rem;
+  }
+
+  .la1,
+  .small-image {
+    height: 200px;
+    border-radius: var(--radius-md);
+  }
+
+  .text-content {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+}
