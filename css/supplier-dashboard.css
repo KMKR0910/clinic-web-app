@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0; /* 'none' is not a valid value for padding */
+    border: none; 
+    outline: none;
+    box-sizing: border-box;
+   
+}
+
+body {
+    display: flex;
+    background: #2015e382
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100px; 
+    height: 100vh;
+    padding: 0 1.7rem; 
+    font-size: larger; 
+    color: white; /* Set the font color to white */
+     
+    overflow: hidden;
+    transition: all 0.5s linear;
+    
+    /* Apply a linear gradient background */
+    background: linear-gradient(45deg, #1E3A5F, #A4C8E1);
+}
+
+
+/* Fix: 'sidebar :hover' should be '.sidebar:hover' */
+.sidebar:hover {
+    width: 309px; /* Expanding the sidebar on hover */
+    transition: 0.5s;
+
+}
+
+.logo {
+    height: 80px;
+    padding: 16px;
+}
+
+.menu {
+    height: 88%;
+    list-style: none; /* Removing default list styles */
+    padding: 0;
+}
+
+.menu li {
+    padding: 1rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+
+.menu li:hover {
+    background-color: rgb(202, 194, 255);
+    
+}
+
+
+
+.menu a {
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Adding 'white-space: nowrap' to prevent text from wrapping */
+.menu a span {
+    overflow: hidden;
+    white-space: nowrap; /* Prevents text from wrapping inside the span */
+}
+
+.menu a i {
+    font-size: 1.2rem;
+}
+
+
+.main--content
+{
+    position:relative;
+    background-color:#E3F2F7 ;
+       padding: 1rem;
+       width: 100%;
+       
+}
+.header--wrapper img 
+{
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+}
+ 
+.header--wrapper
+{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ background: white;  
+ border-radius: 10px;
+ padding:10px 2rem;
+ margin-bottom: 1rem; 
+}
+.header--title
+{
+    color:navy;
+ 
+}
+
+
+/*this is start of the fiedset or the amin body*/
+
+.fieldset1
+{
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    margin-left: 40px;
+    
+    
+   
+}
+.b1
+{
+
+    width: 40%;
+    background-color:  rgba(128, 128, 128, 0.81);
+    color: white;
+margin-right: 30px;
+border: 1px solid rgba(200, 200, 200, 0.5);
+border-radius: 20px;
+text-align: center;
+
+}
+.b11
+{
+    color:white;
+}
+.b11:hover
+{
+    color: red;
+}
+.b2
+{
+    
+    width: 50%;
+    background-color: rgba(128, 128, 128, 0.81);
+margin-right: 30px;
+border-radius: 20px;
+color: white;
+text-align: center;
+}
+.b3
+{
+  display: flex;
+}
+ 
+.confirm
+{
+    background-color: #A4C8E1;
+    color: black;
+    font-size: larger;
+    margin: 1px;
+    margin-top: 1px;
+    border-radius: 15px;
+    text-align: center;
+    width: 30%;
+    height: 60%;
+    margin-left:66% ;
+    margin-top:-25% ;
+    padding: 1em;
+    line-height: 2.5em;
+
+}
+
+ img.app1{
+    width: 250px;
+    height:230px;
+ }
+/* Link Container */
+.review {
+    display: inline-block;
+    background-color:  #A4C8E1; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Add some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    margin-top: 70px;
+}
+
+/* Hover Effect */
+.review:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift up the button slightly */
+}
+
+/* Focus Effect for Accessibility */
+.review:focus
+ {
+    outline: none;
+    background-color: #003f7f; /* Even darker when focused */
+}
+ 
+/* Updated logout link positioning */
+.logout {
+    position: absolute; /* Position it relative to the sidebar */
+    bottom: 20px; /* Push it towards the bottom with some spacing */
+    margin-left: 10px;
+    text-align: right;
+    padding: 15px;
+}
+
+.logout a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+   
+    margin: 8px 0;
+   
+}
+
+.logout a i {
+    margin-right: 10px;
+    
+}
+
+.logout a:hover
+ {
+    color: red; /* Optional: add hover effect for color change */
+}
+
+ 
+
+
+
