@@ -17,50 +17,7 @@ if (isset($_SESSION['name'])) {
     <title>Prescription Data</title>
     <link rel="stylesheet" href="../../css/patient-dashboard.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* Your CSS styles here */
-        body {
-            background-color: #e3f2fd;
-            font-family: Arial, sans-serif;
-        }
-        .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-container2 {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .profile-table th, .profile-table td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: left;
-        }
-        .profile-table th {
-            background-color: #f2f2f2;
-        }
-        .profile-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .profile-table tr:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
+<link rel="stylesheet" href="../../css/patient-record.css">
 </head>
 <body>
     <div class="sidebar">
@@ -124,14 +81,14 @@ if (isset($_SESSION['name'])) {
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
-                <h1><?php echo htmlspecialchars($userName); ?></h1>
-                <h2>Diagnose History</h2>
+                <h1>Diagnose History</h1>
+                
             </div>
         </div>
 
         <div class="fieldsets">
             <div class="profile-container">
-                <h1>Diagnose History</h1>
+               
 
                 <!-- Date Picker -->
                 <label for="datePicker">Select Date:</label>
@@ -141,31 +98,11 @@ if (isset($_SESSION['name'])) {
             </div>
         </div>
         <div class="profile-container2">
-        <!-- Prescription data will be displayed here -->
+        
     </div>
     </div>
 
-    <script>
-        // JavaScript to handle date picker change
-        document.getElementById("datePicker").addEventListener("change", function() {
-            let selectedDate = this.value;
-            let formData = new FormData();
-            formData.append('date', selectedDate);
-
-            fetch('retrive-diagnose.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Update only the prescription part of the page
-                document.querySelector('.profile-container2').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
+   <script src="../../js/diagnose.js"></script>
 
 </body>
 </html>

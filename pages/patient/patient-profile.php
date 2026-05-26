@@ -90,6 +90,16 @@ $patient = [
             padding: 0;
             background-color:#e3f2fd;
         }
+        .header--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    }
+    .header--title {
+    display: flex;
+    flex-direction: column; /* keeps h1 above h2 */
+    }
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -205,14 +215,16 @@ $patient = [
             </ul>
         </div>
     </div>
+
+<div class="main--content">
     <div class="header--wrapper">
             <div class="header--title">
-                <h1><?php echo htmlspecialchars($userName); ?></h1>
-                <h2>Dashboard</h2>
+                <h1>Profile Information</h1>
+               
             </div></div>
 
     <div class="container">
-        <h1>Profile Information</h1><br><br>
+      
         <?php if (isset($message)) echo "<p class='message'>$message</p>"; ?>
         <form method="POST" id="profileForm">
             <div class="profile-info">
@@ -251,7 +263,7 @@ $patient = [
                  <button type="submit" name="delete" class="delete-btn" onclick="return confirm('Are you sure you want to delete this profile?');">Delete Profile</button>
             </div>
         </form>
-    </div>
+    </div></div>
 
     <script>
         const editButton = document.getElementById('editButton');

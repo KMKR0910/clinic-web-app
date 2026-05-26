@@ -1,0 +1,631 @@
+/* ============================================================
+   Medicare+ – Medical Centre Management System
+   FILE: supplier-records.css
+   Pages:  drug-order.php | profile.php (supplier)
+   Mirrors: patient-records.css + patient-profile.css structure
+   Supplier accent: secondary teal + accent green identity
+   ============================================================ */
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+  --accent-dark:    #16A34A;
+  --accent-light:   #DCFCE7;
+  --danger:         #EF4444;
+  --danger-light:   #FEE2E2;
+  --purple:         #7C3AED;
+  --neutral:        #6B7280;
+  --neutral-light:  #F3F4F6;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --surface-alt:    #F1F5F9;
+  --glass:          rgba(255, 255, 255, 0.75);
+  --glass-border:   rgba(255, 255, 255, 0.45);
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --border:         rgba(20, 184, 166, 0.14);
+  --border-input:   #CBD5E1;
+
+  --shadow-sm:  0 2px 8px  rgba(20, 184, 166, 0.07);
+  --shadow-md:  0 8px 32px rgba(20, 184, 166, 0.12);
+  --shadow-lg:  0 20px 60px rgba(20, 184, 166, 0.16);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-pill: 999px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════════════════════════════
+   ORDERS CARD (.profile-container)
+   — Drug orders table + order items table
+   ════════════════════════════════════════════════════════ */
+.profile-container {
+  max-width: 760px;
+  margin: clamp(1.25rem, 3vw, 2rem) auto;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+/* Teal → green top stripe (supplier identity) */
+.profile-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--secondary) 0%,
+    var(--accent)    100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.profile-container:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Section headings inside container */
+.profile-container h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 1.5rem 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.profile-container h2:first-child { margin-top: 0; }
+
+/* ════════════════════════════════════════════════════════
+   CONFIRM / ACTION CARD (.profile-container2)
+   — Confirm order form + shipped button
+   ════════════════════════════════════════════════════════ */
+.profile-container2 {
+  max-width: 760px;
+  margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+/* Accent → primary stripe — distinct from container */
+.profile-container2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--accent)   0%,
+    var(--primary)  100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.profile-container2:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.profile-container2 h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--surface-alt);
+}
+
+/* ════════════════════════════════════════════════════════
+   DATA TABLES (table, #orderTable, #orderItemsTable)
+   — mirrors .profile-table in patient-records.css
+   ════════════════════════════════════════════════════════ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.25rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+}
+
+table th {
+  background: linear-gradient(
+    135deg,
+    var(--accent-light)               0%,
+    rgba(20, 184, 166, 0.12)          100%
+  );
+  color: var(--secondary-dark);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+table td {
+  padding: 0.8rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--surface-alt);
+  vertical-align: middle;
+  transition: background var(--transition), color var(--transition);
+}
+
+table tr:last-child td { border-bottom: none; }
+
+/* Zebra striping */
+table tr:nth-child(even) td { background: var(--surface-alt); }
+
+/* Row hover */
+table tr:hover td {
+  background: var(--accent-light);
+  color: var(--text);
+}
+
+/* ─── "View Items" row button ───────────────────────────── */
+table td button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--secondary-dark);
+  background: var(--accent-light);
+  border: 1.5px solid rgba(20, 184, 166, 0.22);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition),
+              color var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+table td button:hover {
+  background: var(--secondary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.28);
+}
+
+/* ════════════════════════════════════════════════════════
+   CONFIRM ORDER FORM (.form-group)
+   ════════════════════════════════════════════════════════ */
+.form-group {
+  margin: 0 0 1rem;
+}
+
+.form-group label,
+.profile-container2 label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid var(--border-input);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-group input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+}
+
+/* Confirm Order submit */
+input[type="submit"][name="confirmOrder"] {
+  display: inline-flex;
+  padding: 0.65rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.28);
+  margin-top: 0.5rem;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+input[type="submit"][name="confirmOrder"]:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(20, 184, 166, 0.36);
+}
+
+/* Order Shipped submit */
+input[type="submit"][name="orderShipped"] {
+  display: inline-flex;
+  padding: 0.65rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.28);
+  margin-top: 0.75rem;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+input[type="submit"][name="orderShipped"]:hover {
+  filter: brightness(1.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(34, 197, 94, 0.36);
+}
+
+/* Confirmation message */
+p[style*="color: green"],
+.confirmation-msg {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(34, 197, 94, 0.10);
+  color: var(--accent-dark);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(34, 197, 94, 0.22);
+  margin-top: 1rem;
+}
+
+/* ════════════════════════════════════════════════════════
+   SUPPLIER PROFILE — mirrors patient-profile.css
+   (.profile-info, .actions, buttons, .message)
+   ════════════════════════════════════════════════════════ */
+
+/* Profile card heading */
+.profile-container h1,
+.profile-container2 h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+/* Avatar image inside profile card */
+.profile-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-light);
+  box-shadow: var(--shadow-md);
+  display: block;
+  margin: 0 auto 1.25rem;
+}
+
+/* Success / error message */
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.25rem;
+  margin: 0 auto 1.5rem;
+  max-width: fit-content;
+}
+
+/* ─── Profile Info grid ──────────────────────────────────── */
+.profile-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.profile-info label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.3rem;
+  margin-top: 1.1rem;
+}
+
+.profile-info label:first-child { margin-top: 0; }
+
+/* View mode values */
+.profile-info p {
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  color: var(--text);
+  background: var(--surface-alt);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 0.7rem 1rem;
+  margin: 0 0 0.25rem;
+  line-height: 1.5;
+  transition: background var(--transition);
+}
+
+.profile-info p:hover { background: var(--accent-light); }
+
+/* Edit mode inputs */
+.profile-info input[type="text"],
+.profile-info input[type="email"],
+.profile-info input[type="date"],
+.profile-info select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid var(--border-input);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.25rem;
+  box-shadow: var(--shadow-sm);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  appearance: auto;
+}
+
+.profile-info input:focus,
+.profile-info select:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+}
+
+/* ─── Action Buttons ────────────────────────────────────── */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--surface-alt);
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+  white-space: nowrap;
+}
+
+.actions button:hover  { transform: translateY(-2px); }
+.actions button:active { transform: translateY(0); filter: brightness(0.95); }
+
+/* Edit — teal (supplier primary) */
+.edit-btn {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.28);
+}
+.edit-btn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 8px 22px rgba(20, 184, 166, 0.36);
+}
+
+/* Save — accent green */
+.save-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.28);
+}
+.save-btn:hover {
+  filter: brightness(1.07);
+  box-shadow: 0 8px 22px rgba(34, 197, 94, 0.36);
+}
+
+/* Cancel — neutral */
+.cancel-btn {
+  background: var(--neutral-light);
+  color: var(--neutral);
+  border: 1.5px solid #E2E8F0;
+  box-shadow: none;
+}
+.cancel-btn:hover {
+  background: #E2E8F0;
+  transform: translateY(-1px);
+  filter: none;
+}
+
+/* Delete — danger */
+.delete-btn {
+  background: var(--danger-light);
+  color: var(--danger);
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+  box-shadow: none;
+}
+.delete-btn:hover {
+  background: var(--danger);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.30);
+  filter: none;
+}
+
+/* Download button */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+  color: #ffffff;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.26);
+  margin-top: 1rem;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+.download-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(20, 184, 166, 0.34);
+}
+
+/* .fieldsets layout wrapper */
+.fieldsets { width: 100%; }
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════ */
+
+/* Tablet (≤ 860px) */
+@media (max-width: 860px) {
+  .profile-container,
+  .profile-container2 {
+    margin: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  table th, table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .actions { gap: 0.6rem; }
+
+  .actions button {
+    flex: 1 1 140px;
+    justify-content: center;
+  }
+}
+
+/* Mobile (≤ 560px) */
+@media (max-width: 560px) {
+  .profile-container,
+  .profile-container2 {
+    margin: 0.65rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Scrollable tables */
+  .profile-container,
+  .profile-container2 {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table { min-width: 480px; }
+
+  table th, table td {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.65rem;
+    white-space: nowrap;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions button,
+  input[type="submit"][name="confirmOrder"],
+  input[type="submit"][name="orderShipped"] {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-container img {
+    width: 90px;
+    height: 90px;
+  }
+}
