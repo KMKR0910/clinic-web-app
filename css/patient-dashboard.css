@@ -1,249 +1,628 @@
-* {
-    margin: 0;
-    padding: 0; /* 'none' is not a valid value for padding */
-    border: none; 
-    outline: none;
-    box-sizing: border-box;
-   
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+  --accent-dark:    #16A34A;
+  --danger:         #EF4444;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --surface-alt:    #F1F5F9;
+  --glass:          rgba(255, 255, 255, 0.72);
+  --glass-border:   rgba(255, 255, 255, 0.45);
+
+  --sidebar-bg-from: #0B2545;
+  --sidebar-bg-to:   #1E6091;
+  --sidebar-w:       80px;
+  --sidebar-w-open:  260px;
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --shadow-sm:  0 2px 8px  rgba(14, 165, 233, 0.08);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.18);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-pill: 999px;
+
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
 }
 
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* ─── Body Layout ───────────────────────────────────────── */
 body {
-    display: flex;
-    background: #2015e382
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
 }
 
+/* ════════════════════════════════════════════════════════
+   SIDEBAR
+   ════════════════════════════════════════════════════════ */
 .sidebar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100px; 
-    height: 100vh;
-    padding: 0 1.7rem; 
-    font-size: larger; 
-    color: white; /* Set the font color to white */
-     
-    overflow: hidden;
-    transition: all 0.5s linear;
-    
-    /* Apply a linear gradient background */
-    background: linear-gradient(45deg, #1E3A5F, #A4C8E1);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: width var(--transition);
+
+  background: linear-gradient(
+    180deg,
+    var(--sidebar-bg-from) 0%,
+    var(--sidebar-bg-to)   100%
+  );
+
+  /* Subtle inner right border */
+  box-shadow: 4px 0 24px rgba(11, 37, 69, 0.22),
+              inset -1px 0 0 rgba(255, 255, 255, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  z-index: 100;
 }
 
-
-/* Fix: 'sidebar :hover' should be '.sidebar:hover' */
 .sidebar:hover {
-    width: 309px; /* Expanding the sidebar on hover */
-    transition: 0.5s;
-
+  width: var(--sidebar-w-open);
 }
 
+/* ─── Sidebar Logo / Brand area ─────────────────────────── */
+/* NOTE: In the project HTML, .logo wraps the entire <ul class="menu">,
+   so it must fill the full sidebar height — not be a fixed-height header. */
 .logo {
-    height: 80px;
-    padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
 }
 
+/* ─── Nav Menu ──────────────────────────────────────────── */
 .menu {
-    height: 88%;
-    list-style: none; /* Removing default list styles */
-    padding: 0;
+  list-style: none;
+  padding: 1rem 0.65rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  height: 100%;
 }
+
+.menu::-webkit-scrollbar { display: none; }
 
 .menu li {
-    padding: 1rem;
-    margin: 8px 0;
-    border-radius: 8px;
-    transition: all 0.5s ease-in-out;
+  padding: 0;
+  margin: 3px 0;
+  border-radius: var(--radius-md);
+  transition: background var(--transition), transform var(--transition);
 }
 
 .menu li:hover {
-    background-color: rgb(202, 194, 255);
-    
+  background: rgba(255, 255, 255, 0.10);
+  transform: translateX(2px);
 }
 
+/* Active item */
+.menu li.active {
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.35) 0%,
+    rgba(20, 184, 166, 0.25) 100%
+  );
+  box-shadow: inset 3px 0 0 var(--primary);
+}
 
-
+/* Anchor */
 .menu a {
-    color: black;
-    font-size: 14px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-/* Adding 'white-space: nowrap' to prevent text from wrapping */
-.menu a span {
-    overflow: hidden;
-    white-space: nowrap; /* Prevents text from wrapping inside the span */
-}
-
-.menu a i {
-    font-size: 1.2rem;
-}
-
-
-.main--content
-{
-    position:relative;
-    background-color:#E3F2F7 ;
-       padding: 1rem;
-       width: 100%;
-       
-}
-.header--wrapper img 
-{
-   width: 50px;
-   height: 50px;
-   border-radius: 50%;
-}
- 
-.header--wrapper
-{
- display: flex;
- justify-content: space-between;
- align-items: center;
- flex-wrap: wrap;
- background: white;  
- border-radius: 10px;
- padding:10px 2rem;
- margin-bottom: 1rem; 
-}
-.header--title
-{
-    color:navy;
- 
-}
-
-
-/*this is start of the fiedset or the amin body*/
-
-.fieldset1
-{
-    width: 50vw;
-    height: 50vh;
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    margin-left: 40px;
-    
-    
-   
-}
-.b1
-{
-
-    width: 40%;
-    background-color:  rgba(128, 128, 128, 0.81);
-    color: white;
-margin-right: 30px;
-border: 1px solid rgba(200, 200, 200, 0.5);
-border-radius: 20px;
-text-align: center;
-
-}
-.b11
-{
-    color:white;
-}
-.b11:hover
-{
-    color: red;
-}
-.b2
-{
-    
-    width: 50%;
-    background-color: rgba(128, 128, 128, 0.81);
-margin-right: 30px;
-border-radius: 20px;
-color: white;
-text-align: center;
-}
-.b3
-{
   display: flex;
-}
- 
-.confirm
-{
-    background-color: #A4C8E1;
-    color: black;
-    font-size: larger;
-    margin: 1px;
-    margin-top: 1px;
-    border-radius: 15px;
-    text-align: center;
-    width: 30%;
-    height: 60%;
-    margin-left:66% ;
-    margin-top:-25% ;
-    padding: 1em;
-    line-height: 2.5em;
-
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: color var(--transition);
+  white-space: nowrap;
 }
 
- img.app1{
-    width: 250px;
-    height:230px;
- }
-/* Link Container */
-.review {
-    display: inline-block;
-    background-color:  #A4C8E1; /* Blue background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Add some padding */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
-    margin-top: 70px;
+.menu a:hover {
+  color: #ffffff;
 }
 
-/* Hover Effect */
-.review:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-2px); /* Lift up the button slightly */
+.menu li.active a {
+  color: #ffffff;
+  font-weight: 600;
 }
 
-/* Focus Effect for Accessibility */
-.review:focus
- {
-    outline: none;
-    background-color: #003f7f; /* Even darker when focused */
+/* Icons */
+.menu a i {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 22px;
+  text-align: center;
+  transition: transform var(--transition);
 }
- 
-/* Updated logout link positioning */
+
+.menu li:hover a i {
+  transform: scale(1.15);
+}
+
+/* Span label — hidden when sidebar is collapsed */
+.menu a span {
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.sidebar:hover .menu a span {
+  opacity: 1;
+}
+
+/* ─── Logout Item ────────────────────────────────────────── */
 .logout {
-    position: absolute; /* Position it relative to the sidebar */
-    bottom: 20px; /* Push it towards the bottom with some spacing */
-    margin-left: 10px;
-    text-align: right;
-    padding: 15px;
+  position: sticky;
+  bottom: 0;
+  padding: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(11, 37, 69, 0.60)
+  );
 }
 
 .logout a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-   
-    margin: 8px 0;
-   
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.logout a:hover {
+  color: var(--danger);
 }
 
 .logout a i {
-    margin-right: 10px;
-    
+  color: inherit;
 }
 
-.logout a:hover
- {
-    color: red; /* Optional: add hover effect for color change */
+/* ════════════════════════════════════════════════════════
+   MAIN CONTENT
+   ════════════════════════════════════════════════════════ */
+.main--content {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
- 
+/* ─── Header Bar (.header--wrapper) ─────────────────────── */
+.header--wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(14, 165, 233, 0.08);
+  position: relative;
+  overflow: hidden;
+}
 
+/* Gradient left accent stripe */
+.header--wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg, var(--primary), var(--secondary)
+  );
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
 
+.header--wrapper img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-light);
+  box-shadow: var(--shadow-sm);
+}
 
+/* ─── Header Title (.header--title) ─────────────────────── */
+.header--title h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.header--title h2 {
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+  letter-spacing: 0.01em;
+}
+
+/* ════════════════════════════════════════════════════════
+   DASHBOARD CARDS (.fieldset1, .b1, .b2)
+   ════════════════════════════════════════════════════════ */
+.fieldset1 {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+/* ─── Shared card style for .b1 and .b2 ─────────────────── */
+.b1, .b2 {
+  flex: 1 1 220px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem) 1.25rem;
+  border-radius: var(--radius-lg);
+  margin: 0;
+
+  /* Glassmorphism surface */
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  transition: transform var(--transition),
+              box-shadow var(--transition),
+              border-color var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient top stripe per card */
+.b1::before, .b2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg, var(--primary), var(--secondary)
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.b2::before {
+  background: linear-gradient(
+    90deg, var(--secondary), var(--accent)
+  );
+}
+
+.b1:hover, .b2:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+/* ─── Card Images (.app1) ───────────────────────────────── */
+img.app1 {
+  width: 180px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.b1:hover img.app1,
+.b2:hover img.app1 {
+  transform: scale(1.04);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Card Links (.b11) ─────────────────────────────────── */
+.b11 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--primary-dark);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: var(--primary-light);
+  border: 1px solid rgba(14, 165, 233, 0.20);
+  transition: background var(--transition),
+              color var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.b11:hover {
+  background: var(--primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.30);
+}
+
+/* ─── Booking sub-containers ────────────────────────────── */
+.booking, .booking2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* ─── Active menu item highlight ────────────────────────── */
+.active {
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.30) 0%,
+    rgba(20, 184, 166, 0.22) 100%
+  ) !important;
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+/* ─── Info/Confirm Panel (.confirm) ─────────────────────── */
+.confirm {
+  background: var(--glass);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 2em;
+  color: var(--text);
+  text-align: center;
+
+  /* Removed brittle margin-left: 66% / margin-top: -25% */
+  width: 100%;
+  max-width: 380px;
+  margin: 0;
+  height: auto;
+}
+
+/* ─── Review Button (.review) ───────────────────────────── */
+.review {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  padding: 0.65rem 1.4rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.28);
+  margin-top: 1.25rem;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.review:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.36);
+}
+
+.review:focus {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+/* ─── Patient Info blocks ────────────────────────────────── */
+#patient-message {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+#patient-details p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0.2rem 0;
+}
+
+#patient-details strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#error-message {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* ─── Fieldsets (reused from other pages) ───────────────── */
+fieldset {
+  border: 1px solid rgba(14, 165, 233, 0.14);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════ */
+
+/* Tablet (≤ 900px) */
+@media (max-width: 900px) {
+  .fieldset1 {
+    justify-content: center;
+  }
+
+  .b1, .b2 {
+    flex: 1 1 180px;
+    max-width: 260px;
+  }
+
+  img.app1 {
+    width: 150px;
+    height: 130px;
+  }
+
+  .confirm {
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+/* Mobile (≤ 600px) */
+@media (max-width: 600px) {
+  body {
+    flex-direction: column;
+  }
+
+  /* Sidebar becomes a top horizontal bar on mobile */
+  .sidebar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    height: 60px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0;
+    z-index: 200;
+    box-shadow: 0 -4px 20px rgba(11, 37, 69, 0.18);
+  }
+
+  .sidebar:hover {
+    width: 100% !important;
+  }
+
+  .logo { display: none; }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    height: 60px;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 0;
+    scrollbar-width: none;
+  }
+
+  .menu li {
+    flex-shrink: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .menu a {
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.65rem;
+  }
+
+  .menu a span {
+    opacity: 1;
+    font-size: 0.6rem;
+  }
+
+  .menu a i { font-size: 1rem; }
+
+  .logout {
+    position: static;
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .main--content {
+    padding: 0.85rem;
+    padding-bottom: 72px; /* clear fixed bottom nav */
+  }
+
+  .fieldset1 {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .b1, .b2 {
+    max-width: 100%;
+    width: 100%;
+    flex: none;
+  }
+
+  img.app1 {
+    width: 100%;
+    max-width: 220px;
+    height: 160px;
+  }
+
+  .header--wrapper {
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+  }
+}

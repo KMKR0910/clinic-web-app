@@ -17,60 +17,10 @@ if (isset($_SESSION['name'])) {
     <title>Prescription Data</title>
     <link rel="stylesheet" href="../../css/patient-dashboard.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* Your CSS styles here */
-        body {
-            background-color: #e3f2fd;
-            font-family: Arial, sans-serif;
-        }
-        .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-container2 {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-container3 {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .profile-table th, .profile-table td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: left;
-        }
-        .profile-table th {
-            background-color: #f2f2f2;
-        }
-        .profile-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .profile-table tr:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/patient-record.css">
 </head>
+
+<script src="../../js/appointment.js"></script>
 <body>
     <div class="sidebar">
     <div class="sidebar">
@@ -138,16 +88,13 @@ if (isset($_SESSION['name'])) {
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
-                <h1><?php echo htmlspecialchars($userName); ?></h1>
-                <h2>Appoinment Dashboard</h2>
+                <h1>Appoinment Dashboard</h1>
+                
             </div>
         </div>
 
         <div class="fieldsets">
-            <div class="profile-container">
-                <h1>Appoinment</h1>
-
-            </div>
+           
         <div class="profile-container2">
                 <?php
 
@@ -162,7 +109,7 @@ if (isset($_SESSION['user_id'])) {
     $selectedDate->modify('-5 days'); // Subtract 5 days
     $selectedDate = $selectedDate->format('Y-m-d'); // Format the date to 'YYYY-MM-DD'
     
-    // SQL query to get prescriptions for the selected date and patient ID
+   
     $query = "SELECT [Appoinment Number], [Date], [time], [status]
               FROM [tbl_appoinment]
               WHERE [date] >= ? AND [Patient ID] = ?";
@@ -172,7 +119,7 @@ if (isset($_SESSION['user_id'])) {
         die('Error executing query: ' . print_r(sqlsrv_errors(), true));
     }
 
-    // Display prescriptions in a table
+   
     
     echo '<table class="profile-table" id="appointmentTable">';
     echo '<tr><th>Appointment Number</th><th>Date</th><th>Time</th><th>Status</th></tr>';
@@ -208,7 +155,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
        
         <div class="profile-container3">
-        <form action="login.php" method="POST">
+        <form action="" method="POST">
                 <!-- Input Fields for Selected Row -->
 <h3>Selected Appointment Details</h3>
 <label for="appointmentNumber">Appointment Number:</label>
@@ -231,85 +178,47 @@ if (isset($_SESSION['user_id'])) {
             </form>
 
     
-    <script>
-   document.addEventListener('DOMContentLoaded', () => {
-
- 
-    document.querySelectorAll('#appointmentTable tr').forEach((row, index) => {
-        if (index === 0) return; // Skip header row
-        row.addEventListener('click', () => {
-            const cells = row.querySelectorAll('td');
-            const appointmentNumber = cells[0].textContent.trim();
-            const date = cells[1].textContent.trim();
-            const time = cells[2].textContent.trim();
-            const status = cells[3].textContent.trim();
-           
-            document.getElementById('appointmentNumber').value = appointmentNumber;
-            document.getElementById('date').value = date;
-            document.getElementById('time').value = time;
-            document.getElementById('status').value = status;
-
-            document.getElementById('appointmentNumberHidden').value = appointmentNumber;
-        });
-        });
-    });
-});
-
-</script>
-
+   
 
 
 <?php
-//delete appoinment php
-
-// Include database connection file
 include "../../config/db.php";
 
-// Check if the user is logged in
-if (isset($_SESSION['user_id'])) {
+
+if (isset($_SESSION['user_id']) && isset($_POST['delete-appoinment'])) {
+
     $user_id = $_SESSION['user_id'];
 
-   
-    //$appointmentNumber = $_POST['appointmentNumberHidden'];
-    $appointmentNumber = intval($_POST['appointmentNumberHidden']);
-    // SQL query to get prescriptions for the selected date and patient ID
-    $query = "DELETE FROM 
-               [tbl_appoinment]
-              WHERE [date] >= ? AND [Patient ID] = ? AND [Appoinment Number] = ? ";
-    $stmt = sqlsrv_query($conn, $query, array($selectedDate, $user_id,$appointmentNumber));
+    if (!empty($_POST['appointmentNumberHidden'])) {
 
-    if ($stmt === false) {
-        die('Error executing query: ' . print_r(sqlsrv_errors(), true));
-    }
+        $appointmentNumber = intval($_POST['appointmentNumberHidden']);
 
-    // Display prescriptions in a table
-    
-    echo '<table class="profile-table" id="appointmentTable">';
-    echo '<tr><th>Appointment Number</th><th>Date</th><th>Time</th><th>Status</th></tr>';
+        $query = "DELETE FROM [tbl_appoinment]
+                  WHERE [Patient ID] = ?
+                  AND [Appoinment Number] = ?";
 
-    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-        echo '<tr>';
-        echo '<td>' . htmlspecialchars($row['Appoinment Number']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['Date']->format('Y-m-d')) . '</td>';
-        if ($row['time'] instanceof DateTime) {
-            echo '<td>' . htmlspecialchars($row['time']->format('H:i A')) . '</td>';
-        } else {
-            echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+        $params = [$user_id, $appointmentNumber];
+
+        $stmt = sqlsrv_query($conn, $query, $params);
+
+        if ($stmt === false) {
+            die(print_r(sqlsrv_errors(), true));
         }
-        echo '<td>' . htmlspecialchars($row['status']) . '</td>';
-        echo '</tr>';
+
+        sqlsrv_free_stmt($stmt);
+        sqlsrv_close($conn);
+
+        echo "<script>
+                alert('Appointment deleted successfully');
+                window.location.href = window.location.href;
+              </script>";
+
+    } else {
+        echo "<script>alert('No appointment selected');</script>";
     }
 
-    echo '</table>';
-
-
-    // Free the statement and close the connection
-    sqlsrv_free_stmt($stmt);
-    sqlsrv_close($conn);
-} else {
-    // If user is not logged in, redirect to login page
-    header("Location: SuppLog.php");
-    exit();
+} elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "<script>alert('Invalid request');</script>";
 }
 ?>
 </div>

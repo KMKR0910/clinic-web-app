@@ -76,95 +76,8 @@ if (isset($_SESSION['user_id'])) {
     <title>Lab Report Data</title>
     <link rel="stylesheet" href="../../css/patient-dashboard.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* Your CSS styles here */
-        body {
-            background-color: #e3f2fd;
-            font-family: Arial, sans-serif;
-        }
-        .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-container2 {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .profile-table th, .profile-table td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: left;
-        }
-        .profile-table th {
-            background-color: #f2f2f2;
-        }
-        .profile-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .profile-table tr:hover {
+            <link rel="stylesheet" href="../../css/patient-record.css">
 
-            background-color: #f1f1f1;
-        }
-
-        /* Message box styling */
-.message-box {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-/* Button styles */
-.btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-.download-btn {
-    background-color: #28a745; /* Green for Download */
-}
-
-.download-btn:hover {
-    background-color: #218838;
-}
-.print-btn {
-    background-color:rgb(59, 40, 167); /* Green for Download */
-}
-
-.print-btn:hover {
-    background-color:rgb(59, 40, 167);
-}
-
-    </style>
 </head>
 <body>
     <div class="sidebar">
@@ -228,18 +141,13 @@ if (isset($_SESSION['user_id'])) {
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
-                <h1><?php echo htmlspecialchars($userName); ?></h1>
-                <h2>Payement History</h2>
+                <h1>Payement History</h1>
+                
             </div>
         </div>
 
         <div class="fieldsets">
-            <div class="profile-container">
-                <h1>Payment History</h1>
-
-               
             
-            </div>
         </div>
         <div class="profile-container2">
         <?php echo isset($billDetails) ? $billDetails : '<p>No reports available.</p>'; ?>

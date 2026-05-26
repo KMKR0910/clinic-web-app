@@ -1,0 +1,523 @@
+
+
+/* ─── CSS Variables ─────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --secondary:      #14B8A6;
+  --secondary-dark: #0D9488;
+  --accent:         #22C55E;
+  --accent-dark:    #16A34A;
+  --danger:         #EF4444;
+  --danger-light:   #FEE2E2;
+  --purple:         #7C3AED;
+  --purple-light:   #EDE9FE;
+
+  --bg:             #F8FAFC;
+  --surface:        #FFFFFF;
+  --surface-alt:    #F1F5F9;
+  --glass:          rgba(255, 255, 255, 0.75);
+  --glass-border:   rgba(255, 255, 255, 0.45);
+
+  --text:           #1E293B;
+  --text-muted:     #64748B;
+  --text-light:     #94A3B8;
+
+  --border:         rgba(14, 165, 233, 0.14);
+  --border-focus:   var(--primary);
+
+  --shadow-sm:  0 2px 8px  rgba(14, 165, 233, 0.07);
+  --shadow-md:  0 8px 32px rgba(14, 165, 233, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 165, 233, 0.16);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --radius-pill: 999px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+  --font-body:    'DM Sans', 'Segoe UI', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════════════════════════════
+   DATE PICKER CARD (.profile-container)
+   — same role as the availability card in book-appointment
+   ════════════════════════════════════════════════════════ */
+.profile-container {
+  max-width: 640px;
+  margin: clamp(1.25rem, 3vw, 2rem) auto;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+/* Gradient top stripe */
+.profile-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary)   0%,
+    var(--secondary) 50%,
+    var(--accent)    100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.profile-container:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* ─── Date Picker label & input ─────────────────────────── */
+.profile-container label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.profile-container input[type="date"] {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid rgba(14, 165, 233, 0.20);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+}
+
+.profile-container input[type="date"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+/* ════════════════════════════════════════════════════════
+   RESULTS CARD (.profile-container2)
+   — holds the dynamically injected table or "no data" msg
+   ════════════════════════════════════════════════════════ */
+.profile-container2 {
+  max-width: 640px;
+  margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+/* Accent stripe — secondary→accent for visual distinction */
+.profile-container2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--secondary) 0%,
+    var(--accent)    100%
+  );
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.profile-container2:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Empty / no-data message inside container2 */
+.profile-container2 > p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+/* ════════════════════════════════════════════════════════
+   DATA TABLE (.profile-table)
+   — shared by all three pages
+   ════════════════════════════════════════════════════════ */
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+/* Header row */
+.profile-table th {
+  background: linear-gradient(
+    135deg,
+    var(--primary-light)              0%,
+    rgba(20, 184, 166, 0.12)          100%
+  );
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+/* Data cells */
+.profile-table td {
+  padding: 0.8rem 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--surface-alt);
+  vertical-align: middle;
+  transition: background var(--transition), color var(--transition);
+}
+
+.profile-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Zebra striping */
+.profile-table tr:nth-child(even) td {
+  background: var(--surface-alt);
+}
+
+/* Row hover highlight */
+.profile-table tr:hover td {
+  background: var(--primary-light);
+  color: var(--text);
+}
+
+/* ════════════════════════════════════════════════════════
+   ACTION BUTTONS (.btn, .download-btn, .print-btn)
+   — used in payment history page
+   ════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: filter var(--transition),
+              transform var(--transition),
+              box-shadow var(--transition);
+  white-space: nowrap;
+  margin: 0.25rem;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+/* Download — accent green */
+.download-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+
+.download-btn:hover {
+  filter: brightness(1.07);
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+}
+
+/* Print — purple */
+.print-btn {
+  background: linear-gradient(135deg, var(--purple) 0%, #6D28D9 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.22);
+}
+
+.print-btn:hover {
+  filter: brightness(1.10);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.32);
+}
+
+/* ════════════════════════════════════════════════════════
+   TOAST / MESSAGE BOX (.message-box)
+   — fixed bottom notification
+   ════════════════════════════════════════════════════════ */
+.message-box {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.30);
+  z-index: 1000;
+  white-space: nowrap;
+
+  /* Slide-up entrance */
+  animation: toastIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   SELECTED DETAIL FORM (.profile-container3)
+   — used in edit-appointment.php for selected row details
+   ════════════════════════════════════════════════════════ */
+.profile-container3 {
+  max-width: 640px;
+  margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md),
+              inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+/* Danger-tinted stripe — signals this is a destructive action panel */
+.profile-container3::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--danger) 100%);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.profile-container3:hover {
+  box-shadow: var(--shadow-lg),
+              inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Section heading */
+.profile-container3 h3 {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--surface-alt);
+}
+
+/* Labels */
+.profile-container3 label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+  margin-top: 0.85rem;
+}
+
+.profile-container3 label:first-of-type { margin-top: 0; }
+
+/* Read-only inputs */
+.profile-container3 input[type="text"] {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.93rem;
+  color: var(--text);
+  background: var(--surface-alt);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: default;
+  outline: none;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.profile-container3 input[readonly]:focus {
+  border-color: var(--primary-light);
+  background: var(--primary-light);
+}
+
+/* Delete button */
+.profile-container3 button[name="delete-appoinment"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.6rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--danger);
+  background: var(--danger-light);
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition),
+              color var(--transition),
+              box-shadow var(--transition),
+              transform var(--transition);
+}
+
+.profile-container3 button[name="delete-appoinment"]:hover {
+  background: var(--danger);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.30);
+  transform: translateY(-2px);
+}
+
+.profile-container3 button[name="delete-appoinment"]:active {
+  transform: translateY(0);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .profile-container3 {
+    margin: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .profile-container3 {
+    margin: 0.65rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .profile-container3 button[name="delete-appoinment"] {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   .fieldsets wrapper (layout helper used in these pages)
+   ════════════════════════════════════════════════════════ */
+.fieldsets {
+  width: 100%;
+}
+
+/* ─── Responsive Breakpoints ────────────────────────────── */
+
+/* Tablet (≤ 768px) */
+@media (max-width: 768px) {
+  .profile-container,
+  .profile-container2 {
+    margin: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  .profile-table th,
+  .profile-table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .profile-container,
+  .profile-container2 {
+    margin: 0.65rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Horizontally scrollable table on small screens */
+  .profile-container2 {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profile-table {
+    min-width: 420px;
+  }
+
+  .profile-table th,
+  .profile-table td {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.65rem;
+    white-space: nowrap;
+  }
+
+  .btn {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .message-box {
+    font-size: 0.8rem;
+    padding: 0.6rem 1.1rem;
+    bottom: 1rem;
+    max-width: 90vw;
+    white-space: normal;
+    text-align: center;
+  }
+}
