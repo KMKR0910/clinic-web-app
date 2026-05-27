@@ -48,7 +48,7 @@ $updateStmt = sqlsrv_query($conn, $updateSql, $updateParams);
     }
 }
 
-// Fetch patient details
+
 $sql = "SELECT [Supplier_ID], [Company_Name], [Supplier_Name], [Contact_Number], [Email] FROM [tbl_drug_supplier] WHERE [Supplier_ID] = ?";
 $params = array($supplierID);
 $stmt = sqlsrv_query($conn, $sql, $params);
@@ -85,122 +85,7 @@ $supplier = [
     <title>Profile</title>
  <link rel="stylesheet" href="../../css/supplier-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        .main--content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        .profile-container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 70%;
-            padding: 20px;
-            margin-top: 30px;
-            text-align: center;
-        }
-        .profile-container2 {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 70%;
-            padding: 20px;
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .profile-container h1 {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .profile-container h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        .profile-info label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .profile-info p {
-            margin: 0 0 15px;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .profile-info input,
-        .profile-info select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-      
-
-        .profile-container img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background-color: #00796b;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 20px;
-        }
-
-        .download-btn:hover {
-            background-color: #004d40;
-        }
-
-        .actions {
-            text-align: center;
-        }
-        .actions button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .edit-btn {
-            background-color: #007BFF;
-            color: #fff;
-        }
-        .save-btn {
-            background-color: #28a745;
-            color: #fff;
-        }
-        .cancel-btn {
-            background-color: #6c757d;
-            color: #fff;
-        }
-        .message {
-            text-align: center;
-            color: green;
-            font-weight: bold;
-        }
-    </style>
+<link rel="stylesheet" href="../../css/supplier-record.css">
 </head>
 <body>
 
@@ -239,10 +124,10 @@ $supplier = [
     <div class="main--content">
         <class="profile-container">
 
-            <h1>Welcome, <?php echo htmlspecialchars($supplier['Sname']); ?></h1>
-            <h3>Your Profile Information</h3>
+            <h1>Profile Information</h1>
+         
 
-            <img src="../../images/supplier-profile.jpg" alt="User Image">
+          
             <?php if (isset($message)) echo "<p class='message'>$message</p>"; ?>
             <form method="POST" id="profileForm">
           

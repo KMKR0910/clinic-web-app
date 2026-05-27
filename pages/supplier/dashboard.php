@@ -52,15 +52,10 @@ if (isset($_SESSION['Fname'])) {
         <div class="main--content">
             <div class="header--wrapper">
                 <div class="header--title">
-                    <h1>Welcome,<?php echo htmlspecialchars($Fname); ?></h1>
+                    <h1>Welcome , <?php echo htmlspecialchars($Fname); ?></h1>
                     <h2>Drug Supplier Dashboard</h2>
                 </div>
-                <div class="user--info">
-                    <!--<div class="search--box">
-                        <i class="fa-solid fa-search"></i>
-                    </div>-->
-                    <img src="supplier-home-3.jpg" alt="User Image">
-                </div>
+                
             </div>
 
             <div class="fieldset1">
