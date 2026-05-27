@@ -1,8 +1,3 @@
-/* ============================================================
-   Medicare+ – Medical Centre Management System
-   FILE: about-page.css  (About Us – Doctor Profile)
-   Design System: Healthcare Premium – Clean Glassmorphism
-   ============================================================ */
 
 /* ─── CSS Variables ─────────────────────────────────────── */
 :root {
@@ -54,29 +49,7 @@ main {
   padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
 }
 
-/* ─── Page Intro (optional hero label above card) ───────── */
-main::before {
-  content: 'About Us';
-  display: block;
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
 
-main::after {
-  content: 'Meet the doctor behind Medicare+';
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.02em;
-  margin-bottom: 2.5rem;
-}
 
 /* ─── Profile Layout (.image-text-container) ────────────── */
 .image-text-container {

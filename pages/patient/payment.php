@@ -73,7 +73,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Report Data</title>
+    <title>Payment</title>
     <link rel="stylesheet" href="../../css/patient-dashboard.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="../../css/patient-record.css">
@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
-                <h1>Payement History</h1>
+                <h1>Payment History</h1>
                 
             </div>
         </div>

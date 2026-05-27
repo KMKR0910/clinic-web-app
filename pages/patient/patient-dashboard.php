@@ -92,7 +92,7 @@ if (isset($_SESSION['name'])) {
             <fieldset class="b1">
                 <div class="booking">
                     <h3>                         </h3>
-                    <img src="../../images/patient-home-1.png" class="app1" alt="Appointment">
+                    <img src="../../images/patient-home-4.png" class="app1" alt="Appointment">
                     <h3><a href="book-appointment.php" class="b11">Book a Appointment</a></h3>
                 </div>
             </fieldset>
@@ -106,12 +106,11 @@ if (isset($_SESSION['name'])) {
                 </div>
             </fieldset>
 
-            <!-- Delete Appointment Section -->
             
             <fieldset class="b2">
                 <div class="booking">
                     <h3></h3>
-                    <img src="../../images/patient-home-3.jpg" class="app1" alt="Appointment">
+                    <img src="../../images/patient-home-5.png" class="app1" alt="Appointment">
                     <h3><a href="lab-report.php" class="b11">View Laboratory Tests</a></h3>
                 </div>
             </fieldset>

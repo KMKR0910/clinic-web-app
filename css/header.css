@@ -69,7 +69,8 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(1rem, 4vw, 2.5rem);
-  text-align: left;
+  text-align: center;
+  width: 100%;
 
   transition: background var(--transition), box-shadow var(--transition);
 }
@@ -80,6 +81,7 @@ nav.links {
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  margin:0 auto;
 }
 
 nav.links a {
@@ -107,6 +109,34 @@ nav.links a:active {
   transform: translateY(0);
 }
 
+/* ─── Medicare+ Logo Styling ───────────────────────────── */
+.topic {
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  font-size: 1.6rem;         
+  font-weight: 700;         
+  color: #5f1cb6;           
+  letter-spacing: -0.03em; 
+  display: flex;
+  align-items: center;
+  gap: 2px;                 
+  margin: 0;                 
+  cursor: pointer;
+  user-select: none;
+}
+
+/* The "+" Badge */
+.topic-badge {
+  color: #0ea5e9;            
+  font-size: 1.8rem;         
+  font-weight: 600;
+  line-height: 1;
+  transition: transform var(--transition);
+}
+
+/* Subtle Hover Effect */
+.topic:hover .topic-badge {
+  transform: scale(1.15) rotate(90deg); /* Playful twist when hovered */
+}
 /* ─── Auth Buttons Container (.signs) ──────────────────── */
 .signs {
   display: flex;
