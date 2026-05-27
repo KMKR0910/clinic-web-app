@@ -34,13 +34,7 @@ The platform improves communication between **patients, suppliers, and the medic
 - Manage supplier profiles
 - View and manage supply requests/orders
 
----
 
-###  Public Services
-- Access medical centre services online
-- Digital communication with the medical centre
-
----
 
 ##  Technology Stack
 
@@ -95,7 +89,9 @@ clinic-web-app/
 
 ![Appintment](ui/book-appointment.png)
 
-![Home](ui/home.png)
+![Home](ui/mainpage-1.png)
+
+![Login](ui/login.png)
 
 
 ##  Improvements in This Version
@@ -106,22 +102,17 @@ clinic-web-app/
 - Optimized CSS and frontend components
 
 
----
-
-##  Future Enhancements
-
-- Online payment integration
-- Email/SMS appointment reminders
-- Doctor dashboard
-- Patient medical history tracking
-- Mobile application support
-
----
 
 
 
-## 📄 License
+
+##  License
 
 This project was developed for **academic and educational purposes**.
 
 ---
+
+Developers
+- K.M.K.Rashmika
+- K.H.C.N.Rathnaweera 
+
