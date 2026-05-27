@@ -21,7 +21,7 @@ $supplierID = $_SESSION['Supplier_ID'];
 // Fetch orders
 $orders = [];
 
-    $sql = " SELECT [OrderID], [Order_Status], [Total_Amount], [Ordered_date], [Supplier_ID] FROM tbl_Drug_order WHERE [Supplier_ID]=? AND [Order_Status]='Doctor Confirmed'";
+    $sql = " SELECT [OrderID], [Order_Status], [Total_Amount], [Ordered_date], [Supplier_ID] FROM tbl_Drug_order WHERE [Supplier_ID]=? AND [Order_Status]='Doctor Confirmed' OR [Order_Status]='Supplier Confirmed' OR [Order_Status]='Order Shipped'  ORDER BY [Ordered_date] DESC";
     // Prepare and execute the query
 $stmt = sqlsrv_query($conn, $sql, [$supplierID]);
 if ($stmt === false) {
@@ -85,75 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['orderShipped'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Management</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        .form-group {
-            margin: 20px 0;
-        }
-        .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-container2 {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-    <script>
-        function fetchOrderItems(orderID) {
-            window.location.href = `drugOrder.php?orderID=${orderID}`;
-        }
-
-        function confirmOrder() {
-            const totalCost = document.getElementById("totalCost").value;
-            const orderID = document.getElementById("selectedOrderID").value;
-            if (!totalCost || !orderID) {
-                alert("Please select an order and enter the total cost.");
-                return;
-            }
-            else
-
-            const form = document.getElementById("confirmForm");
-            form.submit();
-           
-        }
-        function orderShipped() {
-         
-            const orderID = document.getElementById("selectedOrderID").value;
-            if (!totalCost || !orderID) {
-                alert("Please select an order");
-                return;
-            }
-            else
-
-            const form = document.getElementById("orderShipped");
-            form.submit();
-           
-        }
-    </script>
+<link rel="stylesheet" href="../../css/supplier-record.css">
 </head>
-<>
+
 
 <div class="sidebar">
             <div class="logo">
@@ -189,16 +123,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['orderShipped'])) {
         <div class="main--content">
             <div class="header--wrapper">
                 <div class="header--title">
-                    <h1>Welcome, <?php echo htmlspecialchars($Fname); ?></h1>
+                    <h1>Drug Order Dashbaord</h1>
                 </div></div>
 
                 <div class="fieldsets">
                 <div class="profile-container">
-       
-    <h1>Order Management</h1>
+    
 
     <!-- Orders Table -->
-    <h2>Orders</h2>
+ 
     <table id="orderTable">
         <thead>
             <tr>
@@ -206,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['orderShipped'])) {
                 <th>Status</th>
                 <th>Total Amount</th>
                 <th>Ordered Date</th>
-                <th>Supplier ID</th>
+                
                 <th>Actions</th>
             </tr>
         </thead>
@@ -218,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['orderShipped'])) {
                     <td><?= $order['Total_Amount'] ?></td>
                     <td><?= $order['Ordered_date'] !== null ? htmlspecialchars($order['Ordered_date']) : 'N/A' ?></td>
 
-                    <td><?= $order['Supplier_ID'] ?></td>
+                  
                     <td><button onclick="fetchOrderItems(<?= $order['OrderID'] ?>)">View Items</button></td>
                 </tr>
             <?php endforeach; ?>
@@ -252,23 +185,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['orderShipped'])) {
 </div><div class="profile-container2">
     <!-- Confirm Order Form -->
     <h2>Confirm Order</h2>
-    <form id="confirmForm" method="POST" action="drugOrder.php">
+    <form id="confirmForm" method="POST" action="">
         <div class="form-group">
             <label for="totalCost">Total Cost:</label>
             <input type="number" id="totalCost" name="totalCost" step="0.01"required>
         </div>
-        <input type="hidden" id="selectedOrderID" name="orderID" value="<?= isset($_GET['orderID']) ? $_GET['orderID'] : '' ?>">
-        <input type="submit" name="confirmOrder" value="Confirm Order" onclick="confirmOrder()"></input>
+        <input type="hidden" id="confirmOrderID" name="orderID" value="<?= isset($_GET['orderID']) ? $_GET['orderID'] : '' ?>">
+<input type="submit" name="confirmOrder" value="Confirm Order" onclick="return confirmOrder()">
     </form>
-    <form id="orderShipped" method="POST" action="drugOrder.php">
+    <form id="orderShipped" method="POST" action="">
        
-        <input type="hidden" id="selectedOrderID" name="orderID" value="<?= isset($_GET['orderID']) ? $_GET['orderID'] : '' ?>">
-        <input type="submit" name="orderShipped" value="Order Shipped" onclick="orderShipped()"></input>
+        <input type="hidden" id="shipOrderID" name="orderID" value="<?= isset($_GET['orderID']) ? $_GET['orderID'] : '' ?>">
+<input type="submit" name="orderShipped" value="Order Shipped" onclick="return orderShipped()">
     </form>
 </div>
     <?php if (isset($confirmationMessage)): ?>
         <p style="color: green;"><?= $confirmationMessage ?></p>
     <?php endif; ?>
     </di></div>
+
+    <script src="../../js/drug-order.js"></script>
 </body>
 </html>
